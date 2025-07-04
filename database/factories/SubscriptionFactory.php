@@ -24,7 +24,8 @@ class SubscriptionFactory extends Factory
             'plan_id' => Plan::inRandomOrder()->value('id'),
             'date_assign' => now(),
             'date_expired' => now(),
-            'status' => fake()->randomElement([Subscription::STATUS_ACTIVE, Subscription::STATUS_INACTIVE])
+            'status' => fake()->randomElement([Subscription::STATUS_ACTIVE, Subscription::STATUS_INACTIVE]),
+            'remaining_users' => rand(1, 5)
         ];
     }
 }

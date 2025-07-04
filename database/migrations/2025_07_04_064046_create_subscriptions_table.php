@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tenant_id')->constrained()->onDelete('cascade');
             $table->foreignId('plan_id')->constrained()->onDelete('cascade');
+            $table->integer('remaining_users');
             $table->dateTime('date_assign');
             $table->dateTime('date_expired')->nullable();
             $table->string('status');

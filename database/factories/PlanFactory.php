@@ -20,7 +20,7 @@ class PlanFactory extends Factory
         return [
             'name' => fake()->word(),
             'price_per_month' => fake()->randomNumber(6, false),
-            'users_limit' => rand(1, 5),
+            'users_limit' => rand(3, 10),
             'features' => json_encode(['caracteristica' => "valor", 'caracteristica2' => "valor2"])
         ];
     }

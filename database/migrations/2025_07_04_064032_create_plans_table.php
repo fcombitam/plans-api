@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('price_per_month');
             $table->integer('users_limit');
-            $table->longText('features');
+            $table->longText('features')->nullable();
             $table->timestamps();
         });
     }

@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Tenant extends Model
+class Tenant extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\TenantFactory> */
-    use HasFactory;
+    use HasFactory, HasApiTokens, Notifiable;
 
     protected $fillable = [
         'name',
@@ -42,5 +45,10 @@ class Tenant extends Model
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    public function activePlan(): ?Subscription
+    {
+        return $this->subscriptions()->where('status', Subscription::STATUS_ACTIVE)->first();
     }
 }

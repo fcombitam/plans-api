@@ -34,19 +34,25 @@ class DatabaseSeeder extends Seeder
                 $start = Carbon::now()->subMonth(rand(6, 24));
                 $end = (clone $start)->addMonth(1);
 
+                $plan = $plans->random();
+
                 $tenant->subscriptions()->create([
-                    'plan_id' => $plans->random()->id,
+                    'plan_id' => $plan->id,
                     'date_assign' => $start,
                     'date_expired' => $end,
-                    'status' => Subscription::STATUS_INACTIVE
+                    'status' => Subscription::STATUS_INACTIVE,
+                    'remaining_users' => 0
                 ]);
             }
 
+            $plan = $plans->random();
+
             $tenant->subscriptions()->create([
-                'plan_id' => $plans->random()->id,
+                'plan_id' => $plan->id,
                 'date_assign' => now(),
                 'date_expired' => null,
-                'status' => Subscription::STATUS_ACTIVE
+                'status' => Subscription::STATUS_ACTIVE,
+                'remaining_users' => rand(1, $plan->users_limit - 1)
             ]);
         }
     }

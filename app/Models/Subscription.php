@@ -16,6 +16,7 @@ class Subscription extends Model
     protected $fillable = [
         'tenant_id',
         'plan_id',
+        'remaining_users',
         'date_assign',
         'date_expired',
         'status'
